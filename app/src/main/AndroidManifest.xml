@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="projectfinal.code.hometraining">
+
+    <uses-feature android:name="android.hardware.bluetooth_le" android:required="true"/>
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <application
+        android:allowBackup="false"
+        android:icon="@mipmap/hometraining"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/hometraining"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".ExerciseSplash.Exercise_Splash"
+            android:screenOrientation="fullSensor"
+            android:theme="@style/ExerciseSplash">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ExerciseFirst.Login.Login" />
+        <activity android:name=".BottomNavi.BottomNaviView" />
+        <activity android:name=".ExerciseFirst.Register.Register" />
+        <activity android:name=".Exercise_Select.Body.Exercise_Select_Body" />
+        <activity android:name=".Exercise_Select.Loins.Exercise_Select_Loins" />
+        <activity android:name=".Exercise_Select.Lower.Exercise_Select_Lower" />
+        <activity android:name=".Exercise_Select.Upper.Exercise_Select_Upper" />
+        <activity android:name=".Exercise_List.Myself.Exercise_Myself" />
+        <activity android:name=".Exercise_Settings.userchange.UserChange" />
+        <activity android:name=".Exercise_Settings.Maps.googleMapsGyms" />
+        <activity android:name=".Exercise_Timer.alarm.ExerciseAlarm" />
+        <activity android:name=".Exercise_Settings.KakaoMaps.KakaoMaps" />
+        <activity android:name=".Exercise_Settings.KakaoMaps.Activities.PlaceDetailActivity" />
+        <activity android:name=".Exercise_Settings.Bluetooth.BluetoothMain"
+            android:screenOrientation="fullSensor"
+            android:theme="@style/BluetoothMain"
+            />
+        <activity android:name=".Exercise_Settings.Bluetooth.DeviceControlActivity"/>
+        <service android:name=".Exercise_Settings.Bluetooth.BluetoothLeService" android:enabled="true"/>
+        <activity android:name=".Exercise_List.Active.Active" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="구글키" /> <!-- 구글 apikey -->
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="카카오키" /> <!-- 카카오 apikey -->
+        <receiver android:name=".Exercise_Timer.alarm.receiver.Alarm_Receiver" />
+
+        <service
+            android:name=".Exercise_Timer.alarm.service.AlarmService"
+            android:enabled="true" />
+    </application>
+
+</manifest>

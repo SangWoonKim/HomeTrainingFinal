@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/exercise_sel"
+        android:enabled="true"
+        android:icon="@drawable/echoice"
+        android:title="운동선택"/>
+    <item
+        android:id="@+id/exercise_time"
+        android:icon="@drawable/timer"
+        android:enabled="true"
+        android:title="타이머"
+        />
+    <item
+        android:id="@+id/exercise_fd"
+        android:icon="@drawable/diet"
+        android:enabled="true"
+        android:title="추천음식"/>
+    <item
+        android:id="@+id/exercise_lt"
+        android:icon="@drawable/eiist"
+        android:enabled="true"
+        android:title="운동목록"/>
+    <item
+        android:id="@+id/exercise_st"
+        android:icon="@drawable/set"
+        android:enabled="true"
+        android:title="설정"/>
+</menu>

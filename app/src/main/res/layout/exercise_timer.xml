@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/Timer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="00:00:00"
+        android:textSize="50dp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/BTN_Start"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="시작"
+        android:fontFamily="@font/font"
+        android:background="@drawable/button_background"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/BTN_Record"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="리셋"
+        android:fontFamily="@font/font"
+        android:background="@drawable/button_background"
+        android:textStyle="bold"/>
+
+    <Button
+        android:id="@+id/BTN_alarm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="운동설정"
+        android:fontFamily="@font/font"
+        android:background="@drawable/button_background"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/font"
+        android:text="기록" />
+
+    <ScrollView
+        android:id="@+id/TimerScrollview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/Record"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

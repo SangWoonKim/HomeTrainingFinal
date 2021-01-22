@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/ET_register_Address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="주소입력"
+        android:fontFamily="@font/font"
+        android:textStyle="bold"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/ET_register_phone"
+        app:layout_constraintStart_toStartOf="@+id/ET_register_phone"
+        app:layout_constraintTop_toBottomOf="@+id/ET_register_phone" />
+
+    <EditText
+        android:id="@+id/ET_register_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="전화번호 입력"
+        android:fontFamily="@font/font"
+        android:textStyle="bold"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/ET_register_Name"
+        app:layout_constraintStart_toStartOf="@+id/ET_register_Name"
+        app:layout_constraintTop_toBottomOf="@+id/ET_register_Name" />
+
+    <EditText
+        android:id="@+id/ET_register_Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="이름 입력"
+        android:fontFamily="@font/font"
+        android:textStyle="bold"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/ET_register_Passwordcheck"
+        app:layout_constraintStart_toStartOf="@+id/ET_register_Passwordcheck"
+        app:layout_constraintTop_toBottomOf="@+id/ET_register_Passwordcheck" />
+
+    <EditText
+        android:id="@+id/ET_register_Id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="132dp"
+        android:ems="10"
+        android:hint="아이디 입력"
+        android:fontFamily="@font/font"
+        android:textStyle="bold"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.545"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/ET_register_Password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="비밀번호 (6자리 이상)"
+        android:fontFamily="@font/font"
+        android:textStyle="bold"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="@+id/ET_register_Id"
+        app:layout_constraintStart_toStartOf="@+id/ET_register_Id"
+        app:layout_constraintTop_toBottomOf="@+id/ET_register_Id" />
+
+    <EditText
+        android:id="@+id/ET_register_Passwordcheck"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="비밀번호 확인"
+        android:fontFamily="@font/font"
+        android:textStyle="bold"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="@+id/ET_register_Password"
+        app:layout_constraintStart_toStartOf="@+id/ET_register_Password"
+        app:layout_constraintTop_toBottomOf="@+id/ET_register_Password" />
+
+    <Button
+        android:id="@+id/BTN_register_Register"
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="32dp"
+        android:onClick="BTN_Register_Register"
+        android:text="회원가입"
+        android:fontFamily="@font/font"
+        android:background="@drawable/button_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ET_register_Address" />
+
+    <Button
+        android:id="@+id/BTN_register_Close"
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
+        android:onClick="BTN_Register_Close"
+        android:text="취소"
+        android:fontFamily="@font/font"
+        android:background="@drawable/button_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ET_register_Address" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.9"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.35" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/guideline3"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="@+id/guideline7">
+
+
+        <Button
+            android:id="@+id/BTN_settings_bluetooth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_background"
+            android:text="블루투스 연결 및 확인"
+            android:fontFamily="@font/font"
+            android:layout_weight="1"
+            android:textStyle="bold" />
+        <!--app:layout_constraintBottom_toTopOf="@+id/BTN_settings_maps"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toTopOf="@+id/guideline7" />-->
+
+        <Button
+            android:id="@+id/BTN_settings_maps"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_background"
+            android:text="주변 헬스장 찾기"
+            android:fontFamily="@font/font"
+            android:layout_weight="1"
+            android:textStyle="bold" />
+        <!--app:layout_constraintBottom_toTopOf="@+id/BTN_settings_userchange"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline" />-->
+
+        <Button
+            android:id="@+id/BTN_settings_userchange"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_background"
+            android:text="회원정보 변경"
+            android:fontFamily="@font/font"
+            android:layout_weight="1"
+            android:textStyle="bold" />
+        <!--app:layout_constraintBottom_toTopOf="@+id/BTN_settings_setting"
+         app:layout_constraintEnd_toStartOf="@+id/guideline2"
+         app:layout_constraintHorizontal_bias="0.0"
+         app:layout_constraintStart_toStartOf="@+id/guideline"
+         app:layout_constraintVertical_chainStyle="packed" />-->
+
+        <Button
+            android:id="@+id/BTN_settings_setting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_background"
+            android:text="환경설정"
+            android:fontFamily="@font/font"
+            android:layout_weight="1"
+            android:textStyle="bold" />
+        <!--app:layout_constraintBottom_toTopOf="@+id/BTN_settings_logout"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline" />-->
+
+        <Button
+            android:id="@+id/BTN_settings_logout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_background"
+            android:text="로그아웃"
+            android:fontFamily="@font/font"
+            android:layout_weight="1"
+            android:textStyle="bold" />
+        <!--app:layout_constraintBottom_toTopOf="@+id/BTN_settings_exit"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline" />-->
+
+        <Button
+            android:id="@+id/BTN_settings_exit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_background"
+            android:text="탈퇴"
+            android:fontFamily="@font/font"
+            android:layout_weight="1"
+            android:textStyle="bold" />
+        <!--app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline" />-->
+    </LinearLayout>
+
+    <TextView
+     android:id="@+id/TV_settings_name"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_marginTop="32dp"
+     android:text="이름"
+     android:fontFamily="@font/font"
+     app:layout_constraintStart_toStartOf="@+id/guideline"
+     app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/TV_settings_address"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        app:layout_constraintEnd_toEndOf="@+id/TV_settings_name"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/TV_settings_name" />
+
+
+    <TextView
+        android:id="@+id/TV_settings_phone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/TV_settings_name"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/TV_settings_name" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
