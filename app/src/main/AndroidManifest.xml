@@ -46,8 +46,8 @@
         <activity android:name=".Exercise_Settings.KakaoMaps.Activities.PlaceDetailActivity" />
         <activity android:name=".Exercise_Settings.Bluetooth.BluetoothMain"
             android:screenOrientation="fullSensor"
-            android:theme="@style/BluetoothMain"
-            />
+            android:theme="@style/BluetoothMain"/>
+
         <activity android:name=".Exercise_Settings.Bluetooth.DeviceControlActivity"/>
         <service android:name=".Exercise_Settings.Bluetooth.BluetoothLeService" android:enabled="true"/>
         <activity android:name=".Exercise_List.Active.Active" />

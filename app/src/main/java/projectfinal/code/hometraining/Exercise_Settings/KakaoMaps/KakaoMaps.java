@@ -255,15 +255,12 @@ public class KakaoMaps extends AppCompatActivity implements MapView.CurrentLocat
     }
 
 
-
-
-
 // 근처를 검색을 요청하는 메소드(현재좌표 x,y)
     private void requestSearchLocal(double x, double y) {
         gyms.clear();
         //apiInterface객체에 카카오 rest API를 사용할 수 있도록 정보를 연결하고 객체 생성
         APIinterface apiInterface = RetrofitAPI.getApiClient().create(APIinterface.class);
-        //서버에 요청하는 부분 근데 안됨
+        //서버에 요청하는 부분
         Call<Category_Result> call = apiInterface.getSearchLocationDetail(getString(R.string.restapi_key),"근처 헬스장",x + "",y + "",1000,15);
         // 큐에 삽입 (결과를 받는 객체 생성)
         call.enqueue(new Callback<Category_Result>() {
@@ -294,9 +291,7 @@ public class KakaoMaps extends AppCompatActivity implements MapView.CurrentLocat
                         MapPOIItem marker = new MapPOIItem();
                         marker.setItemName(document.getPlaceName());
                         marker.setTag(tagNum++);
-                    //    double x =Double.parseDouble(document.getY());
-                      //  double y =Double.parseDouble(document.getX());
-
+                        //마커를 찍는 코드
                         MapPoint mapPoint = MapPoint.mapPointWithGeoCoord(document.getY(),document.getX());
                         marker.setMapPoint(mapPoint);
                         marker.setMarkerType(MapPOIItem.MarkerType.BluePin);
@@ -315,10 +310,6 @@ public class KakaoMaps extends AppCompatActivity implements MapView.CurrentLocat
     }
 
 
-
-
-
-
     //길찾기를 하기 위한 카카오맵 호출(없을 경우 플레이스토어 링크로 이동)
     public void showMap(Uri geoLocation){
         Intent kakaoMapsAppIntent;
@@ -334,14 +325,6 @@ public class KakaoMaps extends AppCompatActivity implements MapView.CurrentLocat
             startActivity(kakaoMapsAppIntent);
         }
     }
-
-
-
-
-
-
-
-
 
     @Override
     public void onPOIItemSelected(MapView mapView, MapPOIItem mapPOIItem) {
@@ -361,6 +344,7 @@ public class KakaoMaps extends AppCompatActivity implements MapView.CurrentLocat
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 APIinterface apiInterface = RetrofitAPI.getApiClient().create(APIinterface.class);
+                //세부 내용을 조회를 위한 재검색
                 Call<Category_Result> call = apiInterface.getSearchLocationDetail(getString(R.string.restapi_key),mapPOIItem.getItemName(),String.valueOf(lat),String.valueOf(lng),1000,1);
                 call.enqueue(new Callback<Category_Result>() {
                     @Override
@@ -368,6 +352,7 @@ public class KakaoMaps extends AppCompatActivity implements MapView.CurrentLocat
                         if (response.isSuccessful()) {
                             Intent intent = new Intent(KakaoMaps.this, PlaceDetailActivity.class);
                             assert response.body() != null;
+                            //한개만 누른거라 배열의 크기도 1일테고 인덱스는 0이니 get(0)
                             intent.putExtra(IntentKey.PLACE_SEARCH_DETAIL_EXTRA, response.body().getDocuments().get(0));
                             startActivity(intent);
                         }

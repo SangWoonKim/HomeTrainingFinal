@@ -13,9 +13,11 @@ public class Alarm_Receiver extends BroadcastReceiver{
     @Override
     public void onReceive(Context context, Intent intent) {
         this.context=context;
+        //넘어온 intent값(state)받기
         String getAlarmString = intent.getExtras().getString("state");
         Intent service_intent = new Intent(context, AlarmService.class);
 
+        //넘어온 intent값(state를) 서비스에 다시 전달하기 위해 삽입
         service_intent.putExtra("state",getAlarmString);
 
         //서비스 시작 메소드

@@ -44,8 +44,7 @@ public class AlarmService extends Service {
 
         if (Build.VERSION.SDK_INT>=26){
             String CHANNEL_ID="default";
-            AlarmState.getInstance().setCheck_alarm(true);
-            //final AlarmState alarmState = new AlarmState();
+           AlarmState.getInstance().setCheck_alarm(true);
 
             NotificationChannel channel =new NotificationChannel(CHANNEL_ID,"alarmServiceChannel", NotificationManager.IMPORTANCE_DEFAULT);
             NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
@@ -60,10 +59,7 @@ public class AlarmService extends Service {
                     .build();
             startForeground(1,noticompat);
             notificationManager.notify(1,noticompat);
-            //alarmState.setStateAlarm(true);
-
             Log.d("onCreate()실행","notification 서비스 실행");
-
         }
     }
 
@@ -76,18 +72,9 @@ public class AlarmService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         String CHANNEL_ID="default";
 
-        /*NotificationChannel channel =new NotificationChannel(CHANNEL_ID,"alarmServiceChannel", NotificationManager.IMPORTANCE_HIGH);
-        NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
-        ServiceHandler serviceHandler = new ServiceHandler();
-        alarmServiceThread = new AlarmServiceThread(serviceHandler);
-        alarmServiceThread.start();
-        return START_STICKY;*/
-
-
         String getState = intent.getExtras().getString("state");
 
         //assert란? 첫번 째 인자가 boolean으로 평가되는 표현식 또는 값을 받아 true이면 실행 false면 AssertionError를 예외를 발생시키는 예약어
-
         assert getState!=null;
         switch (getState){
             case "alarm on":
@@ -118,6 +105,7 @@ public class AlarmService extends Service {
            mediaPlayer.reset();
            mediaPlayer.release();
 
+
             this.isRunning = false;
             this.startId = 0;
             this.onDestroy();
@@ -143,11 +131,7 @@ public class AlarmService extends Service {
         }
         Log.d("onstartCommand()실행","백그라운드 서비스 실행");
         return START_NOT_STICKY;
-
     }
-
-
-
 
     @Override
     public void onDestroy() {
@@ -156,31 +140,6 @@ public class AlarmService extends Service {
         //alarmService=null;
         Log.d("onDestory() 실행", "서비스 파괴");
     }
-
-  /*  class ServiceHandler extends Handler{
-
-        String CHANNEL_ID="default";
-
-        @RequiresApi(api = Build.VERSION_CODES.O)
-        @Override
-        public void handleMessage(@NonNull Message msg) {
-            Intent serviceintent = new Intent(AlarmService.this, ExerciseAlarm.class);
-            PendingIntent pendingIntent = PendingIntent.getActivity(AlarmService.this,0,serviceintent,PendingIntent.FLAG_UPDATE_CURRENT);
-            NotificationChannel channel =new NotificationChannel(CHANNEL_ID,"alarmServiceChannel", NotificationManager.IMPORTANCE_HIGH);
-            NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
-            notificationManager.createNotificationChannel(channel);
-
-            Notification noticompat = new NotificationCompat.Builder(AlarmService.this,CHANNEL_ID)
-                    .setContentTitle("HomeTraining")
-                    .setContentText("자신이 설정한 운동의 시간이 끝났습니다.")
-                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                    .setSmallIcon(R.mipmap.ic_launcher)
-                    .setAutoCancel(true)
-                    .build();
-            startForeground(1,noticompat);
-            notificationManager.notify(1,noticompat);
-        }
-    }*/
 
 }
 

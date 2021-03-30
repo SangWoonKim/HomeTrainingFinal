@@ -26,6 +26,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import projectfinal.code.hometraining.ExerciseFirst.Login.Login;
+import projectfinal.code.hometraining.ExerciseFirst.Register.Register;
 import projectfinal.code.hometraining.Exercise_Intent.LoginDataGS;
 import projectfinal.code.hometraining.Exercise_Settings.Bluetooth.BluetoothMain;
 import projectfinal.code.hometraining.Exercise_Settings.CheckUserRequest.CheckUserRequest;
@@ -182,8 +183,9 @@ public class Exercise_Settings extends Fragment implements View.OnClickListener 
 
                 //블루투스 연결 클릭시
             case R.id.BTN_settings_bluetooth:
-                Intent bluetoothIntent = new Intent(getActivity(),BluetoothMain.class);
+                Intent bluetoothIntent = new Intent(getActivity(), BluetoothMain.class);
                 startActivity(bluetoothIntent);
+            break;
 
             //로그아웃 버튼 클릭시
             case R.id.BTN_settings_logout:
@@ -202,6 +204,7 @@ public class Exercise_Settings extends Fragment implements View.OnClickListener 
 
 
             //근처 헬스장 보기 클릭시
+            //카카오 맵 허용 ip등록을 해야 실행가능
             case R.id.BTN_settings_maps:
                 if ((loginIdData!=null)&&(loginPwData!=null)) {
                     Intent maps = new Intent(getActivity(), KakaoMaps.class);
@@ -212,7 +215,7 @@ public class Exercise_Settings extends Fragment implements View.OnClickListener 
                 }
                 break;
 
-
+            //탈퇴 클릭시
             case R.id.BTN_settings_exit:
 
                 if ((loginIdData!=null)&&(loginPwData!=null)){

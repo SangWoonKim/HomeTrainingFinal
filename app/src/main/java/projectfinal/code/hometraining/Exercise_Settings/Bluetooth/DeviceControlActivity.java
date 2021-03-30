@@ -79,6 +79,7 @@ public class DeviceControlActivity extends AppCompatActivity {
     private final BroadcastReceiver gattUpdateReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
+            //gattUpdateReceiver를 통해 intent에 담긴 action을 가져옴
             final String action = intent.getAction();
             if (BluetoothLeService.ACTION_GATT_CONNECTED.equals(action)){
                 connected=true; //상태값 변경
@@ -96,8 +97,6 @@ public class DeviceControlActivity extends AppCompatActivity {
                 displayData(intent.getStringExtra(BluetoothLeService.EXTRA_DATA));
             }
         }
-
-
     };
 
 
@@ -135,7 +134,7 @@ public class DeviceControlActivity extends AppCompatActivity {
             ArrayList<BluetoothGattCharacteristic> charas =
                     new ArrayList<BluetoothGattCharacteristic>();
 
-            // 사용가능한 characteristic을 찾을 때까지 roop
+            // 사용가능한 characteristic을 찾을 때까지 loop
             for (BluetoothGattCharacteristic gattCharacteristic : gattCharacteristics) {
                 charas.add(gattCharacteristic);
                 HashMap<String, String> currentCharaData = new HashMap<String, String>();
@@ -150,6 +149,7 @@ public class DeviceControlActivity extends AppCompatActivity {
         }
 
 
+        //어뎁터 구성
         SimpleExpandableListAdapter gattServiceAdapter = new SimpleExpandableListAdapter(
                 this,
                 gattServiceData,

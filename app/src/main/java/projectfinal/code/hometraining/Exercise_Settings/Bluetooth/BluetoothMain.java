@@ -37,11 +37,10 @@ public class BluetoothMain extends ListActivity {
     private boolean scanning; //스캔 상태값
     private Handler viewhandler;
 
-    private static final int REQUEST_ENABLE_BT =1;
+    private static final int REQUEST_ENABLE_BT = 1;
     public static final long SCAN_PERIOD = 10000;
 //http://airpage.org/xe/mobile_data/27366 구글 fitness API를 이용한 개발 옵션
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +48,7 @@ public class BluetoothMain extends ListActivity {
         getActionBar().setTitle(R.string.title_devices);
         viewhandler = new Handler() ;
 
-        //기기가 BLE를 이원하는지 검사
+        //기기가 BLE를 지원하는지 검사
         if(!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)){
             Toast.makeText(this, R.string.ble_not_supported,Toast.LENGTH_LONG).show();
             finish();
@@ -59,6 +58,12 @@ public class BluetoothMain extends ListActivity {
         //BluetoothManager객체는 블루투스의 기능을 총괄한다.
         final BluetoothManager bluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
         mbluetoothAdapter = bluetoothManager.getAdapter();
+
+        if (mbluetoothAdapter == null){
+            Toast.makeText(this, R.string.error_bluetooth_not_supported, Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
     }
     //검색 실행중일 때의 메뉴 생성및 변환
     @Override
@@ -80,10 +85,12 @@ public class BluetoothMain extends ListActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
+                //스캔클릭시
             case R.id.menu_scan:
                 leDeviceListAdapter.clear();
                 scanLeDevice(true);
                 break;
+                //스캔정지 클릭시
             case R.id.menu_stop:
                 scanLeDevice(false);
                 break;
@@ -91,6 +98,7 @@ public class BluetoothMain extends ListActivity {
         return true;
     }
 
+    //블루투스 목록 아이템 선택시
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         final BluetoothDevice device = leDeviceListAdapter.getDevice(position);
@@ -104,19 +112,23 @@ public class BluetoothMain extends ListActivity {
             mbluetoothAdapter.stopLeScan(leScanCallback);
             scanning=false;
         }
+        startActivity(deviceControlIntent);
     }
 
+    //블루투스 장치를 스캔하는 메소드
     private void scanLeDevice(final boolean enable){
         if (enable){
             viewhandler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     scanning =false;
+                    //스캔 정지
                     mbluetoothAdapter.stopLeScan(leScanCallback);
                     invalidateOptionsMenu();
                 }
             },SCAN_PERIOD);
             scanning = true;
+            //스캔시작
             mbluetoothAdapter.startLeScan(leScanCallback);
         }else {
             scanning = false;
@@ -130,7 +142,7 @@ public class BluetoothMain extends ListActivity {
         if(!mbluetoothAdapter.isEnabled()){
             //블루투스 활성화 하는 intent날림
             //즉 블루투스어뎁터에 블루투스 활성화 작업을 전달
-            Intent enableBlueToothIntent = new Intent(mbluetoothAdapter.ACTION_REQUEST_ENABLE);
+            Intent enableBlueToothIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivityForResult(enableBlueToothIntent, REQUEST_ENABLE_BT);
         }
         leDeviceListAdapter = new LeDeviceListAdapter();
@@ -138,6 +150,7 @@ public class BluetoothMain extends ListActivity {
         scanLeDevice(true);
     }
 
+    //콜백받는 메소드
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_ENABLE_BT && requestCode == Activity.RESULT_CANCELED){
@@ -164,6 +177,7 @@ public class BluetoothMain extends ListActivity {
             mInflater = BluetoothMain.this.getLayoutInflater();
         }
 
+        //찾은 장치 추가
         public void addDevice(BluetoothDevice device) {
             if(!mLeDevices.contains(device)) {
                 mLeDevices.add(device);
@@ -196,7 +210,6 @@ public class BluetoothMain extends ListActivity {
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
             ViewHolder viewHolder;
-            // General ListView optimization code.
             if (view == null) {
                 view = mInflater.inflate(R.layout.bluetooth_device_list, null);
                 viewHolder = new ViewHolder();
@@ -239,3 +252,4 @@ public class BluetoothMain extends ListActivity {
         public TextView deviceAddress;
     }
 }
+

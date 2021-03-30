@@ -66,7 +66,7 @@ public class BluetoothLeService extends Service {
             }
         }
 
-        //서비스를 발견시
+        //서비스를 발견시 또는 목록이 업데이트 되었을 때 호출되는 콜백 즉 새 서비스를 발견시 호출
         @Override
         public void onServicesDiscovered(BluetoothGatt gatt, int status) {
             if (status == BluetoothGatt.GATT_SUCCESS) {
@@ -144,18 +144,17 @@ public class BluetoothLeService extends Service {
     @Override
     public boolean onUnbind(Intent intent) {
         // 주어진 장치를 사용한 후에는 BluetoothGatt.close()가 호출되는지 확인해야함
-        // 리소스가 올바르게 정리되도록합니다. 이 특정 예제에서 close ()는
-        // UI가 서비스에서 연결이 끊어지면 호출됩니다
+        // UI가 서비스에서 연결이 끊어지면 호출
         close();
         return super.onUnbind(intent);
     }
 
     private final IBinder mBinder = new LocalBinder();
 
-    /**
-     * 로컬 Bluetooth 어댑터에 대한 참조를 초기화합니다.
-     * @return 초기화에 성공하면 true를 반환합니다.
-     */
+
+     //로컬 Bluetooth 어댑터에 대한 참조를 초기화
+     //초기화에 성공하면 true를 반환
+
     public boolean initialize(){
         //BluetoothManager
         if (mBluetoothManager == null){
@@ -172,14 +171,10 @@ public class BluetoothLeService extends Service {
         }
         return true;
     }
-
-    /**Bluetooth LE 장치에서 호스팅되는 GATT 서버에 연결합니다.
-     *
-     * @param address 대상 장치의 장치 주소입니다.
-     *
-     * @return 연결이 성공적으로 시작되면 true를 반환합니다. 연결 결과는 @code를 통해 비동기 적으로보고됩니다.
-     * @code BluetoothGattCallback#onConnectionStateChange(android.bluetooth.BluetoothGatt,int,int)
-     */
+    //Bluetooth LE 장치에서 호스팅되는 GATT 서버에 연결합니다.
+    //param address 대상 장치의 장치 주소입니다.
+    //return 연결이 성공적으로 시작되면 true를 반환합니다. 연결 결과는 @code를 통해 비동기 적으로보고됩니다.
+    //code BluetoothGattCallback#onConnectionStateChange(android.bluetooth.BluetoothGatt,int,int)
 
     public boolean connect(final String address) {
         if (mBluetoothAdapter == null || address == null) { //블루투스 어뎁터에 목록이 없거나 또는 장치에 대한 주소가 없을 때
@@ -199,23 +194,22 @@ public class BluetoothLeService extends Service {
         }
 
         final BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(address);
+        //주위에 장치가 없거나 블루투스 장치를 찾지 못했을 경우
         if (device == null){
             Log.w(TAG,"장치를 찾지 못했습니다. 연결할 수 없습니다.");
             return false;
         }
-        // 직접 연결을 원함으로 우리는 자동연결을 설정한다
-        // param은 false
+        // connect(Context,자동연결 여부,비동기 콜백을 수신 할 콜백 핸들러)
         mBluetoothGatt = device.connectGatt(this,false, mGattCallback);
         Log.d(TAG,"새로운 연결을 만듭니다. ");
         mBluetoothDeviceAddress = address;
         mConnectionState = STATE_CONNECTING;
         return true;
     }
-    /**기존 연결을 끊거나 보류중인 연결을 취소합니다.
-     * 단절 결과를 BluetoothGattCallback#onConnectionStateChange(android.bluetooth.BluetoothGatt,int,int) 통해 비동기 적으로보고됩니다.
-     *
-     * */
 
+
+    //기존 연결을 끊거나 보류중인 연결을 취소합니다.
+    // 단절 결과를 BluetoothGattCallback#onConnectionStateChange(android.bluetooth.BluetoothGatt,int,int) 통해 비동기 적으로보고
     public void disconnect(){
         if (mBluetoothAdapter == null || mBluetoothGatt ==null){
             Log.w(TAG, "블루투스 어뎁터가 초기화가 되지 않았습니다.");
@@ -224,10 +218,8 @@ public class BluetoothLeService extends Service {
         mBluetoothGatt.disconnect();
     }
 
-    /**
-     * 지정된 BLE 디바이스를 사용한 후 앱은 이 메소드를 호출하여 리소스가 올바르게 해제되도록해야함.
-     */
 
+     // 지정된 BLE 디바이스를 사용한 후 앱은 이 메소드를 호출하여 리소스가 올바르게 해제되도록해야함.
     public void close() {
         if (mBluetoothGatt == null) {
             return;
@@ -236,13 +228,7 @@ public class BluetoothLeService extends Service {
         mBluetoothGatt = null;
     }
 
-    /**
-     *주어진 {@code BluetoothGattCharacteristic}에 대한 읽기를 요청하십시오.
-     * 읽은 결과는 {@code BluetoothGattCallback # onCharacteristicRead (android.bluetooth.BluetoothGatt, android.bluetooth.BluetoothGattCharacteristic, int)}
-     * 콜백을 통해 비동기 적으로보고됩니다.
-     *
-     * @param characteristic  BluetoothGattCharacteristic으로 부터 얻어온 @param입니다
-     */
+
     public void readCharacteristic(BluetoothGattCharacteristic characteristic){
         if (mBluetoothAdapter == null || mBluetoothGatt == null){
             Log.w(TAG, "블루투스 매니저가 초기화 되지 않음");
@@ -251,12 +237,10 @@ public class BluetoothLeService extends Service {
         mBluetoothGatt.readCharacteristic(characteristic);
     }
 
-    /**
-     * characteristic에 대한 알림을 활성화 또는 비활성화 하는 메소드
-     *
-     * @param characteristic characteristic에 대한 행동
-     * @param enabled true인 경우 알림을 활성화 하게 됨 false일 경우 비활성화
-     */
+     // characteristic에 대한 알림을 활성화 또는 비활성화 하는 메소드
+     // characteristic characteristic에 대한 행동
+     // enabled true인 경우 알림을 활성화 하게 됨 false일 경우 비활성화
+
     public void setCharacteristicNotification(BluetoothGattCharacteristic characteristic, boolean enabled){
         if (mBluetoothAdapter == null || mBluetoothGatt ==null){
             Log.w(TAG,"블루투스 어뎁터가 초기화되지 않았습니다.");
@@ -276,11 +260,9 @@ public class BluetoothLeService extends Service {
     }
 
 
-    /**
-     * 연결된 장치에서 지원되는 GATT서비스 목록을 검색함
-     * @code BluetoothGatt#discoverServices()가 완료된 후에 만 호출해야함
-     *
-     */
+
+    // 연결된 장치에서 지원되는 GATT서비스 목록을 검색함
+    // BluetoothGatt#discoverServices()가 완료된 후에 만 호출해야함
     public List<BluetoothGattService> getSupportedGattServices() {
         if (mBluetoothGatt == null) return null;
         //블루투스가 제공하는 GATT서비스 목록을 반환하는 메소드 getServices() 반환값이 List형식이기 때문에 함수와 맞춰야함

@@ -54,7 +54,7 @@ private BackPressCloseHandler closelogin = new BackPressCloseHandler(this);
 public Bundle userinfo;
 //정보를 전달할 프레그먼트를 인스턴스화
 public Fragment exercise_settings =new Exercise_Settings();
-    //LoginDataGS의 getter,setter를 이용하여 각 클래스들에 값 전달할 객체 생성
+
     private SharedPreferences theme;
     DarkThemeUtil themeList;
 
@@ -179,7 +179,7 @@ public Fragment exercise_settings =new Exercise_Settings();
                             LoginDataGS.getInstance().setLogin_ID(U_id);
                             LoginDataGS.getInstance().setLogin_PW(U_pw);
 
-                            //로그인시 이동하는 문장
+                            //로그인시 이동하는 기능
                           Intent login = new Intent(Login.this, BottomNaviView.class);
                           login.putExtra("U_id", U_id);
                           login.putExtra("U_pw", U_pw);
@@ -202,9 +202,6 @@ public Fragment exercise_settings =new Exercise_Settings();
                     Toast.makeText(getApplicationContext(), "비밀번호 또는 id를 확인하세요", Toast.LENGTH_SHORT).show();
                 }
             };
-
-
-
 
             //Bundle을 이용하여 U_id에 저장 php에서 받은 값 저장
             //Bundle이란 상태정보를 저장하는 객체
